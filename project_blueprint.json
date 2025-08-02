@@ -1,0 +1,65 @@
+{
+    "project_name": "Fin-Scale Microcap AI Portfolio",
+    "description": "AI-driven microcap portfolio optimization system using risk management, real-time data APIs, and modular architecture.",
+    "tech_stack": {
+        "frontend": [
+            "HTML",
+            "CSS",
+            "Vanilla JS"
+        ],
+        "backend": [
+            "Node.js",
+            "GraphQL (planned)"
+        ],
+        "database": [
+            "TimescaleDB",
+            "Redis (cache)"
+        ],
+        "APIs": [
+            "Alpaca",
+            "Financial Modeling Prep (FMP)"
+        ]
+    },
+    "modules": {
+        "risk_manager": "Implements dynamic constraints and scoring for asset risk profiles.",
+        "portfolio_optimizer": "Allocates weights using expected return and volatility.",
+        "api_connector": "Fetches market data from Alpaca and FMP.",
+        "json_loader": "Parses portfolio asset definitions from /json/*.json"
+    },
+    "architecture": {
+        "entry_point": "index.html",
+        "server": "server.js",
+        "json_input": "/json/*.json",
+        "output": "Dynamic asset allocation rendered on frontend"
+    },
+    "workflow": {
+        "data_flow": [
+            "User opens index.html",
+            "JS loads asset data from /json/*.json",
+            "Data sent to portfolioOptimizer (backend)",
+            "Optimized portfolio returned and rendered"
+        ],
+        "api_usage": "Optional real-time data fetch with key from .env"
+    },
+    "known_issues": [
+        "No unified testing system implemented",
+        "README lacks deployment details",
+        "Some scripts are placeholders",
+        "No real-time data integration completed"
+    ],
+    "roadmap": [
+        "Add example JSON files to /json/",
+        "Implement real optimization logic",
+        "Connect live data via API",
+        "Build basic test coverage (Jest)",
+        "Write detailed README and setup guide",
+        "Document API in docs/api-integration.md",
+        "Draw architecture in docs/architecture.md"
+    ],
+    "authors": [
+        "Snapcorr",
+        "CN Dev (DeepSeek)",
+        "GPT Co-pilot"
+    ],
+    "version": "0.4-dev"
+}
