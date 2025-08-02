@@ -1,1 +1,131 @@
+import { applyPortfolioRiskManagement, findInvestmentOpportunities } from './core.js';
+import { contentData } from './content.js';
 
+// Инициализация интерфейса
+export function initUI() {
+    setupCheckboxes();
+    setupModals();
+    setupPhaseToggles();
+}
+
+// Настройка чекбоксов задач
+function setupCheckboxes() {
+    const checkboxes = document.querySelectorAll('.task-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', (event) => {
+            const taskItem = event.target.closest('.task-item');
+            taskItem.classList.toggle('status-done', event.target.checked);
+        });
+    });
+}
+
+// Настройка модальных окон
+function setupModals() {
+    setupModal(
+        'open-archive-btn', 
+        'archive-modal', 
+        'modal-close-btn-archive', 
+        contentData.archive, 
+        'modal-body-archive'
+    );
+    
+    setupModal(
+        'open-bible-btn', 
+        'bible-modal', 
+        'modal-close-btn-bible', 
+        contentData.bible, 
+        'modal-body-bible'
+    );
+}
+
+// Общая функция настройки модального окна
+function setupModal(openBtnId, modalId, closeBtnId, content, contentContainerId) {
+    const openBtn = document.getElementById(openBtnId);
+    const modalOverlay = document.getElementById(modalId);
+    const closeBtn = document.getElementById(closeBtnId);
+    const contentContainer = document.getElementById(contentContainerId);
+
+    if (!openBtn || !modalOverlay || !closeBtn || !contentContainer) return;
+
+    openBtn.addEventListener('click', () => {
+        contentContainer.innerHTML = content;
+        modalOverlay.style.display = 'flex';
+    });
+
+    const closeModal = () => {
+        modalOverlay.style.display = 'none';
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (event) => {
+        if (event.target === modalOverlay) {
+            closeModal();
+        }
+    });
+}
+
+// Настройка сворачивания/разворачивания фаз
+function setupPhaseToggles() {
+    const phaseHeaders = document.querySelectorAll('.phase-summary');
+    phaseHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const phase = header.closest('.phase');
+            phase.classList.toggle('active');
+        });
+    });
+}
+
+// Обновление данных портфеля в UI
+export function updatePortfolioUI(portfolio, marketData) {
+    const portfolioContainer = document.getElementById('portfolio-container');
+    if (!portfolioContainer) return;
+    
+    let html = `<div class="portfolio-header">
+        <h3>Текущий портфель</h3>
+        <p>Общая стоимость: $${calculatePortfolioValue(portfolio, marketData).toFixed(2)}</p>
+    </div>`;
+    
+    portfolio.positions.forEach(position => {
+        const currentPrice = marketData[position.ticker] || position.buyPrice;
+        const value = currentPrice * position.quantity;
+        const pnl = ((currentPrice - position.buyPrice) / position.buyPrice * 100).toFixed(2);
+        
+        html += `<div class="portfolio-item">
+            <div class="ticker">${position.ticker}</div>
+            <div class="details">
+                <span>${position.quantity} акций</span>
+                <span>Цена: $${currentPrice.toFixed(2)}</span>
+                <span>PnL: ${pnl}%</span>
+            </div>
+            <div class="value">$${value.toFixed(2)}</div>
+        </div>`;
+    });
+    
+    portfolioContainer.innerHTML = html;
+}
+
+// Показ инвестиционных возможностей
+export function showOpportunities(opportunities) {
+    const opportunitiesContainer = document.getElementById('opportunities-container');
+    if (!opportunitiesContainer) return;
+    
+    if (opportunities.length === 0) {
+        opportunitiesContainer.innerHTML = '<p>Нет подходящих инвестиционных возможностей</p>';
+        return;
+    }
+    
+    let html = '<h3>Рекомендуемые инвестиции</h3>';
+    opportunities.forEach(opp => {
+        html += `<div class="opportunity">
+            <div class="ticker">${opp.ticker}</div>
+            <div class="details">
+                <span>Цена: $${opp.price.toFixed(2)}</span>
+                <span>Кол-во: ${opp.quantity}</span>
+                <span>Стоп-лосс: $${opp.stopLoss.toFixed(2)}</span>
+            </div>
+            <div class="reason">${opp.reason}</div>
+        </div>`;
+    });
+    
+    opportunitiesContainer.innerHTML = html;
+}
