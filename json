@@ -1,0 +1,201 @@
+{
+  "project": {
+    "name": "Fin-Scale",
+    "type": "Инвестиционный процессор для микро-кап акций",
+    "version": "1.0-ES_fin",
+    "concept": "Автоматизированная система управления портфелем микро-кап акций с доказательным подходом и строгим риск-менеджментом",
+    "core_principles": [
+      "Доказательное верховенство",
+      "Нулевая спекуляция",
+      "Контроль актуальности",
+      "Исполнительная дисциплина"
+    ],
+    "repository": "https://github.com/Snapcorr/Fin-Scale-Roadmap"
+  },
+  
+  "technical_stack": {
+    "frontend": {
+      "language": "JavaScript (ES6+)",
+      "framework": "Vanilla JS",
+      "ui_components": ["HTML5", "CSS3", "JetBrains Mono font"],
+      "styling": "CSS-переменные, Flexbox, Grid",
+      "build_tools": "ES Modules"
+    },
+    "backend": {
+      "runtime": "Node.js",
+      "framework": "Express.js",
+      "middleware": ["cors", "express.json"],
+      "server": "REST API"
+    },
+    "apis": {
+      "Financial Modeling Prep": {
+        "endpoints": [
+          "getCompanyProfile",
+          "getFinancialRatios",
+          "getHistoricalData",
+          "screenStocks"
+        ],
+        "status": "Частично реализовано"
+      },
+      "Alpaca Markets": {
+        "endpoints": [
+          "createOrder",
+          "getAsset",
+          "getMarketData",
+          "getPortfolio"
+        ],
+        "status": "Частично реализовано"
+      }
+    },
+    "devops": {
+      "environment": "Local development",
+      "deployment": "Не настроено",
+      "containerization": "Не реализовано"
+    }
+  },
+  
+  "architecture": {
+    "frontend_structure": {
+      "index.html": "Главная страница приложения",
+      "css/main.css": "Основные стили проекта",
+      "js/core.js": "Ядро риск-менеджмента и логики портфеля",
+      "js/ui.js": "Управление интерфейсом и обработка событий",
+      "js/content.js": "Контент протоколов и документации",
+      "js/api/": {
+        "fmp.js": "Интеграция с Financial Modeling Prep API",
+        "alpaca.js": "Интеграция с Alpaca Markets API"
+      }
+    },
+    "backend_structure": {
+      "server/server.js": "Основной сервер приложения",
+      "server/services/": {
+        "riskManager.js": "Сервис управления рисками портфеля",
+        "portfolioOptimizer.js": "Сервис оптимизации портфеля"
+      }
+    }
+  },
+  
+  "implementation_status": {
+    "completed": [
+      "Базовый интерфейс терминала",
+      "Система навигации по дорожной карте",
+      "Механизм загрузки рыночных данных",
+      "Реализация риск-менеджмента (MAX_POSITION, STOP_LOSS)",
+      "Прототип командного процессора",
+      "Интеграция модальных окон для документации",
+      "Система динамической загрузки контента"
+    ],
+    "partial": [
+      "API интеграции (требуют реальных ключей)",
+      "Оптимизация портфеля (только стратегия равных весов)",
+      "Механизм автоматической торговли (только прототип)",
+      "Визуализация портфеля (базовая реализация)"
+    ],
+    "not_implemented": [
+      "Алгоритм оптимизации по коэффициенту Шарпа",
+      "Интеграция с реальными брокерскими счетами",
+      "Автоматическое обновление рыночных данных",
+      "Система оповещений и уведомлений",
+      "Бэктестинг стратегий",
+      "Панель аналитики и отчетности"
+    ]
+  },
+  
+  "critical_errors": {
+    "current": [
+      "Неправильная структура папок в репозитории",
+      "Отсутствие модуля core.js в фронтенде",
+      "Некорректные пути импорта в server.js",
+      "Отсутствие сервиса riskManager.js в бэкенде",
+      "Не настроена связь между фронтендом и бэкендом"
+    ],
+    "potential": [
+      "Уязвимости при работе с реальными API ключами",
+      "Проблемы с обработкой ошибок API",
+      "Отсутствие валидации пользовательского ввода",
+      "Возможные утечки памяти при долгой работе сервера"
+    ]
+  },
+  
+  "technical_decisions": {
+    "risk_management": {
+      "MAX_POSITION": "20%",
+      "STOP_LOSS": "-15%",
+      "MIN_VOLUME": "$50k",
+      "implementation": "Автоматическая проверка при каждой операции"
+    },
+    "data_processing": {
+      "market_data": "Клиентская обработка (временное решение)",
+      "portfolio_calculation": "calculatePortfolioValue в core.js",
+      "validation": "Функция validatePosition в core.js"
+    },
+    "ui_ux": {
+      "theme": "Темная терминальная тематика",
+      "colors": {
+        "dark_bg": "#0a1929",
+        "light_bg": "#132f4c",
+        "text_main": "#c6d0e0",
+        "text_green": "#00c896",
+        "text_amber": "#ffb74d",
+        "text_cyan": "#4dabf5"
+      },
+      "navigation": "Система вкладок с дорожной картой"
+    }
+  },
+  
+  "next_development_steps": [
+    {
+      "phase": "Инфраструктура",
+      "tasks": [
+        "Исправить структуру папок (перемещение server.js)",
+        "Добавить недостающие файлы (core.js, ui.js, riskManager.js)",
+        "Настроить корректные пути импорта",
+        "Реализовать базовую сборку проекта"
+      ]
+    },
+    {
+      "phase": "Интеграции",
+      "tasks": [
+        "Добавить реальные API ключи в .env файл",
+        "Реализовать полный цикл работы с Financial Modeling Prep API",
+        "Настроить песочницу Alpaca Markets",
+        "Добавить обработку ошибок API"
+      ]
+    },
+    {
+      "phase": "Функционал",
+      "tasks": [
+        "Реализовать алгоритм оптимизации по коэффициенту Шарпа",
+        "Добавить панель аналитики портфеля",
+        "Внедрить систему бэктестинга стратегий",
+        "Реализовать механизм автоматической ребалансировки"
+      ]
+    },
+    {
+      "phase": "Безопасность",
+      "tasks": [
+        "Добавить аутентификацию пользователей",
+        "Реализовать шифрование чувствительных данных",
+        "Внедрить двухфакторную аутентификацию для торговых операций",
+        "Настроить HTTPS для сервера"
+      ]
+    }
+  ],
+  
+  "documentation": {
+    "bible": "Системный Протокол: Fin-Scale (1.0-ES_fin)",
+    "roadmap": "Интерактивная дорожная карта разработки",
+    "api_docs": {
+      "fmp": "https://site.financialmodelingprep.com/developer/docs/",
+      "alpaca": "https://alpaca.markets/docs/api-documentation/api-v2/"
+    },
+    "testing_protocol": "Не реализовано"
+  },
+  
+  "development_history": {
+    "2023-08-04": "Первоначальная реализация базового функционала",
+    "2023-08-05": "Рефакторинг структуры проекта",
+    "2023-08-06": "Добавление риск-менеджмента и документации",
+    "next_milestone": "Реализация автоматической торговли и подключение реальных API"
+  }
+}
