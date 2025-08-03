@@ -1,0 +1,39 @@
+{
+  "network": {
+    "type": "local-first",
+    "protocol": "HTTPS",
+    "port": 443,
+    "api_gateway": {
+      "enabled": true,
+      "routing": "RESTful",
+      "rate_limiting": true,
+      "auth_required": true
+    },
+    "firewall": {
+      "enabled": true,
+      "rules": [
+        {
+          "port": 443,
+          "action": "allow"
+        },
+        {
+          "port": 80,
+          "action": "deny"
+        },
+        {
+          "ip_range": "0.0.0.0/0",
+          "action": "monitor"
+        }
+      ]
+    },
+    "internal_services": [
+      "riskManager",
+      "portfolioOptimizer",
+      "coreEngine"
+    ],
+    "external_services": [
+      "FinancialModelingPrep",
+      "AlpacaMarkets"
+    ]
+  }
+}
