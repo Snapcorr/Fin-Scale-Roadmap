@@ -1,0 +1,29 @@
+{
+  "config": {
+    "environment": "development",
+    "api_keys_required": true,
+    "api_keys": {
+      "fmp": "YOUR_FMP_API_KEY_HERE",
+      "alpaca": {
+        "key": "YOUR_ALPACA_API_KEY",
+        "secret": "YOUR_ALPACA_SECRET_KEY"
+      }
+    },
+    "portfolio_constraints": {
+      "max_position_pct": 0.2,
+      "stop_loss_pct": -0.15,
+      "min_liquidity_usd": 50000
+    },
+    "features": {
+      "backtesting": false,
+      "auto_rebalance": false,
+      "real_time_data": false,
+      "two_factor_auth": false
+    },
+    "logging": {
+      "enabled": true,
+      "level": "debug",
+      "output": "console"
+    }
+  }
+}
