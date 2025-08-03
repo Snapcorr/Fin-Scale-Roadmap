@@ -1,0 +1,15 @@
+{
+  "protection_mode": true,
+  "data_access": "restricted",
+  "integrity_checks": true,
+  "allowed_users": ["Snapcorr", "DeepSeek", "GPT Co-pilot"],
+  "encryption": {
+    "enabled": true,
+    "algorithm": "AES-256"
+  },
+  "logs": {
+    "enabled": true,
+    "location": "/logs/protect/"
+  },
+  "notes": "Этот файл отвечает за включение режима защиты и контроль доступа к данным в проекте Fin-Scale."
+}
